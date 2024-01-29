@@ -9,6 +9,7 @@ from nltk.tokenize import sent_tokenize
 import numpy as np
 import transformers
 from transformers import BartTokenizer, BartForConditionalGeneration
+from transformers import pipeline
 
 nltk.download('punkt')
 nltk.download('wordnet')
@@ -19,7 +20,7 @@ unique_id = link.split("=")[-1]
 sub = YouTubeTranscriptApi.get_transcript(unique_id)  
 subtitle = " ".join([x['text'] for x in sub])
 
-subtitle = subtitle.replace("n","")
+subtitle = subtitle.replace("\n","")
 sentences = sent_tokenize(subtitle)
 
 organized_sent = {k:v for v,k in enumerate(sentences)}
@@ -56,3 +57,9 @@ input_tensor = tokenizer.encode( subtitle, return_tensors="pt", max_length=512)
 outputs_tensor = model.generate(input_tensor, max_length=160, min_length=120, length_penalty=2.0, num_beams=4, early_stopping=True)
 
 print(tokenizer.decode(outputs_tensor[0]))
+
+# summarizer = pipeline('summarization')
+
+# summary = summarizer(subtitle, max_length = 180, min_length =  30)
+
+# print(summary)
