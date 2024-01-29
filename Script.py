@@ -15,13 +15,16 @@ nltk.download('punkt')
 nltk.download('wordnet')
 nltk.download('omw-1.4')
               
-link = "https://www.youtube.com/watch?v=Y8Tko2YC5hA" 
+# link = "https://www.youtube.com/watch?v=Y8Tko2YC5hA" 
+link = "https://www.youtube.com/watch?v=G2fqAlgmoPo"
 unique_id = link.split("=")[-1]
 sub = YouTubeTranscriptApi.get_transcript(unique_id)  
 subtitle = " ".join([x['text'] for x in sub])
 
 subtitle = subtitle.replace("\n","")
 sentences = sent_tokenize(subtitle)
+
+print("Actual script: ", "\n", subtitle)
 
 organized_sent = {k:v for v,k in enumerate(sentences)}
 
@@ -56,7 +59,7 @@ input_tensor = tokenizer.encode( subtitle, return_tensors="pt", max_length=512)
 
 outputs_tensor = model.generate(input_tensor, max_length=160, min_length=120, length_penalty=2.0, num_beams=4, early_stopping=True)
 
-print(tokenizer.decode(outputs_tensor[0]))
+print("YouTube video Summary:", "\n", tokenizer.decode(outputs_tensor[0]))
 
 # summarizer = pipeline('summarization')
 
