@@ -2,6 +2,15 @@
 
 Welcome to the Youtube Summarizer. This summarizes youtube videos using NLP.
 
+When using extractive summarization, the algorithm will take the relevant passage and group its most essential paragraphs together to produce the summary text.
+
+When using abstractive summarization, the algorithm will use its own words to construct a summary based on the provided passage. Compared to extractive summarization, this is more complicated.
+
+We are utilizing extractive summarization for our YouTube summarizer. We use a variety of summary approaches for extractive summarization, such as TFIDF Vectorizer, BART, or Bidirectional and Auto-Regressive Transformer.
+
+Term frequency-inverse document frequency, or TF-IDF, is a vectorizer that turns text into a vector format. There are two terms in it: inverse document frequency and term frequency. The product of these two components is the TF-IDF value. The number of times a word appears in a sentence divided by the total number of words in the sentence is known as term frequency. The log of the number of sentences by the number of sentences that contain the supplied word is known as the inverse document frequency. Okay, let's get the implementation going.
+
+
 The following is an example:
 1 - Introduction to Generative AI by Google Cloud Tech(https://www.youtube.com/watch?v=G2fqAlgmoPo) - credits
 
